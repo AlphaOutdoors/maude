@@ -117,3 +117,7 @@ Maude should capture and present telemetry in the most efficient method possible
 Maude *must* be simple for the integrating application to add and use.
 
 Currently, Maude can be added to an applicaton in one line `.UseMaudeAndActivate()`.
+
+## Landing Page (Marketing)
+
+The static marketing page lives in `website/` (this repo). Open `website/index.html` in a browser to view the landing experience inspired by the provided design reference. No build tooling is required; assets are inline and styles live in `website/styles.css`.

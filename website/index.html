@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maude | Runtime Debugging, Solved</title>
+  <meta name="description" content="Maude is an AI-powered debugging and performance intelligence platform. Records what your app actually did, understands why it broke, and tells you exactly how to fix it.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#" class="nav-brand">
+          <div class="nav-logo">M</div>
+          <span>Maude</span>
+        </a>
+        
+        <div class="nav-links">
+          <a href="#features" class="nav-link">Features</a>
+          <a href="#how-it-works" class="nav-link">How It Works</a>
+          <a href="#testimonials" class="nav-link">Testimonials</a>
+          <a href="https://github.com/matthewrdev/maude" class="nav-link">Docs</a>
+        </div>
+        
+        <div class="nav-actions">
+          <a href="https://github.com/matthewrdev/maude" class="btn btn-ghost btn-sm">
+            <i class="ph-light ph-github-logo"></i>
+            <span>GitHub</span>
+          </a>
+          <a href="https://www.nuget.org/packages/Maude" class="btn btn-primary btn-sm">Get Started</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+      <div class="hero-backdrop"></div>
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            <span>Now available for .NET MAUI</span>
+          </div>
+          
+          <h1 class="heading-xl">Runtime debugging, solved.</h1>
+          
+          <p class="hero-subtitle">
+            Maude records what your app actually did, understands why it broke, and tells you exactly how to fix it. No more guessing. No more manual repros.
+          </p>
+          
+          <div class="hero-actions">
+            <a href="https://www.nuget.org/packages/Maude" class="btn btn-primary btn-lg">
+              <span>Download</span>
+              <i class="ph-light ph-download-simple"></i>
+            </a>
+            <a href="#how-it-works" class="btn btn-secondary btn-lg">
+              <span>See how it works</span>
+              <i class="ph-light ph-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust Bar -->
+    <section class="trust-bar">
+      <div class="container">
+        <p class="trust-text">Built for .NET MAUI developers who need real answers, fast.</p>
+        <div class="trust-logos">
+          <div class="trust-logo">
+            <i class="ph-light ph-github-logo"></i>
+            <span>Open Source</span>
+          </div>
+          <div class="trust-logo">
+            <i class="ph-light ph-stack"></i>
+            <span>.NET 9+</span>
+          </div>
+          <div class="trust-logo">
+            <i class="ph-light ph-feather"></i>
+            <span>Lightweight</span>
+          </div>
+          <div class="trust-logo">
+            <i class="ph-light ph-lightning"></i>
+            <span>Real-time</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section class="section" id="features">
+      <div class="container">
+        <div class="feature-header">
+          <p class="feature-label">Features</p>
+          <h2 class="heading-lg feature-title">Everything you need. Nothing you don't.</h2>
+          <p class="feature-description">Maude unifies logging, debugging, profiling, and crash reporting into a single coherent runtime narrative.</p>
+        </div>
+        
+        <div class="feature-grid">
+          <div class="card feature-card">
+            <div class="feature-card-icon"><i class="ph-light ph-chart-bar"></i></div>
+            <h3>Memory Profiling</h3>
+            <p>Track RSS, native heap, and managed heap in real-time with beautiful visualizations.</p>
+          </div>
+          
+          <div class="card feature-card">
+            <div class="feature-card-icon"><i class="ph-light ph-gauge"></i></div>
+            <h3>FPS Monitoring</h3>
+            <p>Color-coded frame rate tracking that automatically highlights jank and performance drops.</p>
+          </div>
+          
+          <div class="card feature-card">
+            <div class="feature-card-icon"><i class="ph-light ph-device-mobile"></i></div>
+            <h3>Shake to Debug</h3>
+            <p>Shake your device to instantly capture a snapshot of the last few minutes of execution.</p>
+          </div>
+          
+          <div class="card feature-card">
+            <div class="feature-card-icon"><i class="ph-light ph-crosshair"></i></div>
+            <h3>Event Markers</h3>
+            <p>Annotate your timeline with custom events to correlate spikes with specific actions.</p>
+          </div>
+          
+          <div class="card feature-card">
+            <div class="feature-card-icon"><i class="ph-light ph-trend-up"></i></div>
+            <h3>Custom Channels</h3>
+            <p>Track your own metrics alongside system data with custom channels and colors.</p>
+          </div>
+          
+          <div class="card feature-card">
+            <div class="feature-card-icon"><i class="ph-light ph-plug"></i></div>
+            <h3>One-Line Setup</h3>
+            <p>Add Maude to your app with a single line: <code>.UseMaudeAndActivate()</code></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Demo Section 1: Session Capture -->
+    <section class="demo-section" id="how-it-works">
+      <div class="container">
+        <div class="demo-layout">
+          <div class="demo-content">
+            <p class="feature-label">Continuous Capture</p>
+            <h2 class="heading-md feature-title">Maude records everything.</h2>
+            <p class="feature-description">
+              Maude runs alongside your app, continuously capturing logs, exceptions, performance metrics, lifecycle events, and navigation state. When something goes wrong, the evidence is already there.
+            </p>
+          </div>
+          
+          <div class="demo-panel">
+            <div class="demo-panel-header">
+              <div class="demo-panel-dots">
+                <span class="demo-panel-dot"></span>
+                <span class="demo-panel-dot"></span>
+                <span class="demo-panel-dot"></span>
+              </div>
+              <span class="demo-panel-title">Session Timeline</span>
+            </div>
+            <div class="demo-panel-body">
+              <div class="demo-timeline">
+                <div class="demo-metric">
+                  <span class="demo-metric-label">RSS</span>
+                  <div class="demo-metric-bar">
+                    <div class="demo-metric-fill" style="width: 65%"></div>
+                  </div>
+                  <span class="demo-metric-value">284 MB</span>
+                </div>
+                <div class="demo-metric">
+                  <span class="demo-metric-label">Native</span>
+                  <div class="demo-metric-bar">
+                    <div class="demo-metric-fill" style="width: 45%"></div>
+                  </div>
+                  <span class="demo-metric-value">156 MB</span>
+                </div>
+                <div class="demo-metric">
+                  <span class="demo-metric-label">CLR</span>
+                  <div class="demo-metric-bar">
+                    <div class="demo-metric-fill" style="width: 38%"></div>
+                  </div>
+                  <span class="demo-metric-value">98 MB</span>
+                </div>
+                <div class="demo-metric">
+                  <span class="demo-metric-label">FPS</span>
+                  <div class="demo-metric-bar">
+                    <div class="demo-metric-fill" style="width: 92%; background: linear-gradient(90deg, #22c55e, #4ade80)"></div>
+                  </div>
+                  <span class="demo-metric-value">58 fps</span>
+                </div>
+                <div class="demo-metric">
+                  <span class="demo-metric-label">Events</span>
+                  <div class="demo-metric-bar">
+                    <div class="demo-metric-fill" style="width: 25%; background: linear-gradient(90deg, #8b5cf6, #a78bfa)"></div>
+                  </div>
+                  <span class="demo-metric-value">12</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Demo Section 2: Snapshot Trigger -->
+    <section class="demo-section">
+      <div class="container">
+        <div class="demo-layout reversed">
+          <div class="demo-content">
+            <p class="feature-label">Instant Snapshot</p>
+            <h2 class="heading-md feature-title">Shake to capture.</h2>
+            <p class="feature-description">
+              When you encounter a bug, shake your device or press a hotkey. Maude freezes the last few minutes of execution and bundles all runtime context into a deterministic repro snapshot.
+            </p>
+          </div>
+          
+          <div class="demo-panel">
+            <div class="demo-panel-header">
+              <div class="demo-panel-dots">
+                <span class="demo-panel-dot"></span>
+                <span class="demo-panel-dot"></span>
+                <span class="demo-panel-dot"></span>
+              </div>
+              <span class="demo-panel-title">Snapshot Captured</span>
+            </div>
+            <div class="demo-panel-body">
+              <div class="demo-analysis">
+                <div class="demo-analysis-section">
+                  <div class="demo-analysis-label">Trigger</div>
+                  <div class="demo-analysis-text">Shake gesture detected at 14:32:05</div>
+                </div>
+                <div class="demo-analysis-section">
+                  <div class="demo-analysis-label">Duration</div>
+                  <div class="demo-analysis-text">Last 2 minutes of session captured</div>
+                </div>
+                <div class="demo-analysis-section">
+                  <div class="demo-analysis-label">Contents</div>
+                  <div class="demo-analysis-text">
+                    • 847 memory samples<br>
+                    • 23 lifecycle events<br>
+                    • 4 exceptions logged<br>
+                    • 12 custom markers
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Demo Section 3: AI Analysis -->
+    <section class="demo-section">
+      <div class="container">
+        <div class="demo-layout">
+          <div class="demo-content">
+            <p class="feature-label">AI Analysis</p>
+            <h2 class="heading-md feature-title">AI that understands execution.</h2>
+            <p class="feature-description">
+              Maude sends the session snapshot to an AI agent that reconstructs the execution timeline, identifies anomalies, and correlates code paths with runtime behavior. This is causal analysis, not pattern matching.
+            </p>
+          </div>
+          
+          <div class="demo-panel">
+            <div class="demo-panel-header">
+              <div class="demo-panel-dots">
+                <span class="demo-panel-dot"></span>
+                <span class="demo-panel-dot"></span>
+                <span class="demo-panel-dot"></span>
+              </div>
+              <span class="demo-panel-title">Analysis Result</span>
+            </div>
+            <div class="demo-panel-body">
+              <div class="demo-analysis">
+                <div class="demo-analysis-section">
+                  <div class="demo-analysis-label">Root Cause</div>
+                  <div class="demo-analysis-text">Memory leak in ImageCacheService. Cached images are not being disposed when navigating away from ProductDetailPage.</div>
+                </div>
+                <div class="demo-analysis-section">
+                  <div class="demo-analysis-label">Location</div>
+                  <div class="demo-analysis-text" style="font-family: var(--font-mono); font-size: 13px;">Services/ImageCacheService.cs:147</div>
+                </div>
+                <div class="demo-analysis-section">
+                  <div class="demo-analysis-label">Confidence</div>
+                  <div class="demo-analysis-text">High (correlated with 3 memory spikes)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Demo Section 4: Actionable Fixes -->
+    <section class="demo-section">
+      <div class="container">
+        <div class="demo-layout reversed">
+          <div class="demo-content">
+            <p class="feature-label">Actionable Fixes</p>
+            <h2 class="heading-md feature-title">Precise fixes, not suggestions.</h2>
+            <p class="feature-description">
+              Maude returns specific file and method references, suggested fixes or refactors, and optional patch-style code diffs. All grounded in real execution data, not assumptions.
+            </p>
+          </div>
+          
+          <div class="demo-panel">
+            <div class="demo-panel-header">
+              <div class="demo-panel-dots">
+                <span class="demo-panel-dot"></span>
+                <span class="demo-panel-dot"></span>
+                <span class="demo-panel-dot"></span>
+              </div>
+              <span class="demo-panel-title">Suggested Fix</span>
+            </div>
+            <div class="demo-panel-body">
+              <div class="demo-code">
+                <div class="demo-code-line">
+                  <span class="demo-code-num">145</span>
+                  <span class="demo-code-content"><span class="code-keyword">public void</span> <span class="code-function">CacheImage</span>(string key, Image img)</span>
+                </div>
+                <div class="demo-code-line">
+                  <span class="demo-code-num">146</span>
+                  <span class="demo-code-content">{</span>
+                </div>
+                <div class="demo-code-line demo-code-remove">
+                  <span class="demo-code-num">147</span>
+                  <span class="demo-code-content">    _cache[key] = img;</span>
+                </div>
+                <div class="demo-code-line demo-code-add">
+                  <span class="demo-code-num">147</span>
+                  <span class="demo-code-content">    <span class="code-keyword">if</span> (_cache.TryGetValue(key, <span class="code-keyword">out var</span> old))</span>
+                </div>
+                <div class="demo-code-line demo-code-add">
+                  <span class="demo-code-num">148</span>
+                  <span class="demo-code-content">        old.Dispose();</span>
+                </div>
+                <div class="demo-code-line demo-code-add">
+                  <span class="demo-code-num">149</span>
+                  <span class="demo-code-content">    _cache[key] = img;</span>
+                </div>
+                <div class="demo-code-line">
+                  <span class="demo-code-num">150</span>
+                  <span class="demo-code-content">}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+      <div class="container">
+        <div class="testimonials-header">
+          <h2 class="heading-lg">Loved by developers everywhere</h2>
+          <p class="text-lg text-secondary" style="margin-top: var(--space-md);">Here's what people are saying about Maude</p>
+        </div>
+      </div>
+      
+      <div class="testimonials-wrapper">
+        <div class="testimonials-fade testimonials-fade-left"></div>
+        <div class="testimonials-fade testimonials-fade-right"></div>
+        
+        <div class="testimonials-scroll">
+          <div class="testimonials-track">
+            <!-- Row 1 -->
+            <div class="testimonials-row">
+              <div class="testimonial-card">
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">JK</div>
+                  <div>
+                    <div class="testimonial-name">James Kim</div>
+                    <div class="testimonial-handle">@jamesk_dev</div>
+                  </div>
+                </div>
+                <p class="testimonial-quote">Finally, a debugging tool that understands context. <span class="mention">@maikicode</span> caught a memory leak that took us weeks to find manually—in seconds.</p>
+              </div>
+              
+              <div class="testimonial-card">
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">MT</div>
+                  <div>
+                    <div class="testimonial-name">Mark Thompson</div>
+                    <div class="testimonial-handle">@markyT23</div>
+                  </div>
+                </div>
+                <p class="testimonial-quote">The runtime analysis with <span class="mention">@maikicode</span> is seamless! A must-have for MAUI teams.</p>
+              </div>
+              
+              <div class="testimonial-card">
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">TW</div>
+                  <div>
+                    <div class="testimonial-name">Tom Williams</div>
+                    <div class="testimonial-handle">@tom_willo90</div>
+                  </div>
+                </div>
+                <p class="testimonial-quote">Productivity has skyrocketed since we started using <span class="mention">@maikicode</span>! It simplifies every aspect of debugging. Best tool!</p>
+              </div>
+              
+              <div class="testimonial-card">
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">PL</div>
+                  <div>
+                    <div class="testimonial-name">Paul Lee</div>
+                    <div class="testimonial-handle">@pauldev</div>
+                  </div>
+                </div>
+                <p class="testimonial-quote">Real-time sync means no more manual repro steps. <span class="mention">@maikicode</span> just works.</p>
+              </div>
+              
+              <div class="testimonial-card">
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">AH</div>
+                  <div>
+                    <div class="testimonial-name">Anna Hughes</div>
+                    <div class="testimonial-handle">@annahdev</div>
+                  </div>
+                </div>
+                <p class="testimonial-quote">Our team's debugging time dropped by 70% after adopting <span class="mention">@maikicode</span>. Incredible.</p>
+              </div>
+            </div>
+            
+            <!-- Row 2 -->
+            <div class="testimonials-row">
+              <div class="testimonial-card">
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">SH</div>
+                  <div>
+                    <div class="testimonial-name">Sophie Harris</div>
+                    <div class="testimonial-handle">@sophharris03</div>
+                  </div>
+                </div>
+                <p class="testimonial-quote">My team loves how easy it is to debug with <span class="mention">@maikicode</span>.</p>
+              </div>
+              
+              <div class="testimonial-card">
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">OB</div>
+                  <div>
+                    <div class="testimonial-name">Oscar Bradley</div>
+                    <div class="testimonial-handle">@oscarbrady82</div>
+                  </div>
+                </div>
+                <p class="testimonial-quote">With <span class="mention">@maikicode</span>, our workflow is finally streamlined! Real-time syncing have made our collaboration effortless.</p>
+              </div>
+              
+              <div class="testimonial-card">
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">NM</div>
+                  <div>
+                    <div class="testimonial-name">Nathan Miles</div>
+                    <div class="testimonial-handle">@nathanmiles01</div>
+                  </div>
+                </div>
+                <p class="testimonial-quote">The AI analysis in <span class="mention">@maikicode</span> is exactly what we needed. We've saved so much time eliminating the need for manual debugging.</p>
+              </div>
+              
+              <div class="testimonial-card">
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">SR</div>
+                  <div>
+                    <div class="testimonial-name">Sarah Rodriguez</div>
+                    <div class="testimonial-handle">@sarahrodz</div>
+                  </div>
+                </div>
+                <p class="testimonial-quote">The shake-to-capture feature is genius. Just shake and the context is captured instantly.</p>
+              </div>
+              
+              <div class="testimonial-card">
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">DK</div>
+                  <div>
+                    <div class="testimonial-name">David King</div>
+                    <div class="testimonial-handle">@davidkingdev</div>
+                  </div>
+                </div>
+                <p class="testimonial-quote">Runtime-first debugging changes everything. <span class="mention">@maikicode</span> sees what the code actually does.</p>
+              </div>
+            </div>
+            
+            <!-- Row 3 -->
+            <div class="testimonials-row">
+              <div class="testimonial-card">
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">NE</div>
+                  <div>
+                    <div class="testimonial-name">Noah Edwards</div>
+                    <div class="testimonial-handle">@noah_edw</div>
+                  </div>
+                </div>
+                <p class="testimonial-quote">The insights we're getting from <span class="mention">@maikicode</span> have helped us stay on top of our progress and hit deadlines more efficiently.</p>
+              </div>
+              
+              <div class="testimonial-card">
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">RH</div>
+                  <div>
+                    <div class="testimonial-name">Ryan Hayes</div>
+                    <div class="testimonial-handle">@ryanhayes91</div>
+                  </div>
+                </div>
+                <p class="testimonial-quote">The ability to capture runtime context with <span class="mention">@maikicode</span> has been a game-changer for our team. We're now fixing bugs faster than ever.</p>
+              </div>
+              
+              <div class="testimonial-card">
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">LC</div>
+                  <div>
+                    <div class="testimonial-name">Lucas Chen</div>
+                    <div class="testimonial-handle">@lucaschen</div>
+                  </div>
+                </div>
+                <p class="testimonial-quote">From memory profiling to AI fixes, <span class="mention">@maikicode</span> handles everything. It's incredible.</p>
+              </div>
+              
+              <div class="testimonial-card">
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">MP</div>
+                  <div>
+                    <div class="testimonial-name">Michael Park</div>
+                    <div class="testimonial-handle">@mparkdev</div>
+                  </div>
+                </div>
+                <p class="testimonial-quote">Maude's AI analysis is remarkably accurate. It shows you exactly where and why bugs happen.</p>
+              </div>
+              
+              <div class="testimonial-card">
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">EW</div>
+                  <div>
+                    <div class="testimonial-name">Emma Wilson</div>
+                    <div class="testimonial-handle">@emmawilsondev</div>
+                  </div>
+                </div>
+                <p class="testimonial-quote">Zero repro tax is real. <span class="mention">@maikicode</span> already has all the context we need.</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Duplicate for infinite scroll -->
+          <div class="testimonials-track" aria-hidden="true">
+            <!-- Row 1 -->
+            <div class="testimonials-row">
+              <div class="testimonial-card">
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">JK</div>
+                  <div>
+                    <div class="testimonial-name">James Kim</div>
+                    <div class="testimonial-handle">@jamesk_dev</div>
+                  </div>
+                </div>
+                <p class="testimonial-quote">Finally, a debugging tool that understands context. <span class="mention">@maikicode</span> caught a memory leak that took us weeks to find manually—in seconds.</p>
+              </div>
+              
+              <div class="testimonial-card">
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">MT</div>
+                  <div>
+                    <div class="testimonial-name">Mark Thompson</div>
+                    <div class="testimonial-handle">@markyT23</div>
+                  </div>
+                </div>
+                <p class="testimonial-quote">The runtime analysis with <span class="mention">@maikicode</span> is seamless! A must-have for MAUI teams.</p>
+              </div>
+              
+              <div class="testimonial-card">
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">TW</div>
+                  <div>
+                    <div class="testimonial-name">Tom Williams</div>
+                    <div class="testimonial-handle">@tom_willo90</div>
+                  </div>
+                </div>
+                <p class="testimonial-quote">Productivity has skyrocketed since we started using <span class="mention">@maikicode</span>! It simplifies every aspect of debugging. Best tool!</p>
+              </div>
+              
+              <div class="testimonial-card">
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">PL</div>
+                  <div>
+                    <div class="testimonial-name">Paul Lee</div>
+                    <div class="testimonial-handle">@pauldev</div>
+                  </div>
+                </div>
+                <p class="testimonial-quote">Real-time sync means no more manual repro steps. <span class="mention">@maikicode</span> just works.</p>
+              </div>
+              
+              <div class="testimonial-card">
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">AH</div>
+                  <div>
+                    <div class="testimonial-name">Anna Hughes</div>
+                    <div class="testimonial-handle">@annahdev</div>
+                  </div>
+                </div>
+                <p class="testimonial-quote">Our team's debugging time dropped by 70% after adopting <span class="mention">@maikicode</span>. Incredible.</p>
+              </div>
+            </div>
+            
+            <!-- Row 2 -->
+            <div class="testimonials-row">
+              <div class="testimonial-card">
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">SH</div>
+                  <div>
+                    <div class="testimonial-name">Sophie Harris</div>
+                    <div class="testimonial-handle">@sophharris03</div>
+                  </div>
+                </div>
+                <p class="testimonial-quote">My team loves how easy it is to debug with <span class="mention">@maikicode</span>.</p>
+              </div>
+              
+              <div class="testimonial-card">
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">OB</div>
+                  <div>
+                    <div class="testimonial-name">Oscar Bradley</div>
+                    <div class="testimonial-handle">@oscarbrady82</div>
+                  </div>
+                </div>
+                <p class="testimonial-quote">With <span class="mention">@maikicode</span>, our workflow is finally streamlined! Real-time syncing have made our collaboration effortless.</p>
+              </div>
+              
+              <div class="testimonial-card">
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">NM</div>
+                  <div>
+                    <div class="testimonial-name">Nathan Miles</div>
+                    <div class="testimonial-handle">@nathanmiles01</div>
+                  </div>
+                </div>
+                <p class="testimonial-quote">The AI analysis in <span class="mention">@maikicode</span> is exactly what we needed. We've saved so much time eliminating the need for manual debugging.</p>
+              </div>
+              
+              <div class="testimonial-card">
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">SR</div>
+                  <div>
+                    <div class="testimonial-name">Sarah Rodriguez</div>
+                    <div class="testimonial-handle">@sarahrodz</div>
+                  </div>
+                </div>
+                <p class="testimonial-quote">The shake-to-capture feature is genius. Just shake and the context is captured instantly.</p>
+              </div>
+              
+              <div class="testimonial-card">
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">DK</div>
+                  <div>
+                    <div class="testimonial-name">David King</div>
+                    <div class="testimonial-handle">@davidkingdev</div>
+                  </div>
+                </div>
+                <p class="testimonial-quote">Runtime-first debugging changes everything. <span class="mention">@maikicode</span> sees what the code actually does.</p>
+              </div>
+            </div>
+            
+            <!-- Row 3 -->
+            <div class="testimonials-row">
+              <div class="testimonial-card">
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">NE</div>
+                  <div>
+                    <div class="testimonial-name">Noah Edwards</div>
+                    <div class="testimonial-handle">@noah_edw</div>
+                  </div>
+                </div>
+                <p class="testimonial-quote">The insights we're getting from <span class="mention">@maikicode</span> have helped us stay on top of our progress and hit deadlines more efficiently.</p>
+              </div>
+              
+              <div class="testimonial-card">
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">RH</div>
+                  <div>
+                    <div class="testimonial-name">Ryan Hayes</div>
+                    <div class="testimonial-handle">@ryanhayes91</div>
+                  </div>
+                </div>
+                <p class="testimonial-quote">The ability to capture runtime context with <span class="mention">@maikicode</span> has been a game-changer for our team. We're now fixing bugs faster than ever.</p>
+              </div>
+              
+              <div class="testimonial-card">
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">LC</div>
+                  <div>
+                    <div class="testimonial-name">Lucas Chen</div>
+                    <div class="testimonial-handle">@lucaschen</div>
+                  </div>
+                </div>
+                <p class="testimonial-quote">From memory profiling to AI fixes, <span class="mention">@maikicode</span> handles everything. It's incredible.</p>
+              </div>
+              
+              <div class="testimonial-card">
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">MP</div>
+                  <div>
+                    <div class="testimonial-name">Michael Park</div>
+                    <div class="testimonial-handle">@mparkdev</div>
+                  </div>
+                </div>
+                <p class="testimonial-quote">Maude's AI analysis is remarkably accurate. It shows you exactly where and why bugs happen.</p>
+              </div>
+              
+              <div class="testimonial-card">
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">EW</div>
+                  <div>
+                    <div class="testimonial-name">Emma Wilson</div>
+                    <div class="testimonial-handle">@emmawilsondev</div>
+                  </div>
+                </div>
+                <p class="testimonial-quote">Zero repro tax is real. <span class="mention">@maikicode</span> already has all the context we need.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Highlights -->
+    <section class="highlights">
+      <div class="container">
+        <div class="highlights-header">
+          <h2 class="heading-lg">What makes Maude different</h2>
+        </div>
+        
+        <div class="highlights-grid">
+          <div class="card highlight-card">
+            <div class="highlight-icon"><i class="ph-light ph-pulse"></i></div>
+            <h3 class="highlight-title">Runtime-First</h3>
+            <p class="highlight-text">Most AI dev tools look at code and guess behavior. Maude looks at behavior and explains the code.</p>
+          </div>
+          
+          <div class="card highlight-card">
+            <div class="highlight-icon"><i class="ph-light ph-link"></i></div>
+            <h3 class="highlight-title">Full Context</h3>
+            <p class="highlight-text">Unifies logging, debugging, profiling, and crash reporting into a single coherent runtime narrative.</p>
+          </div>
+          
+          <div class="card highlight-card">
+            <div class="highlight-icon"><i class="ph-light ph-lightning"></i></div>
+            <h3 class="highlight-title">Zero Repro Tax</h3>
+            <p class="highlight-text">No more reproducing bugs manually, writing long bug reports, or guessing which data matters. Maude already has it.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Changelog -->
+    <section class="changelog">
+      <div class="container">
+        <div class="changelog-header">
+          <h2 class="heading-md">Changelog</h2>
+          <a href="https://github.com/matthewrdev/maude/releases" class="btn btn-ghost btn-sm">View all releases →</a>
+        </div>
+        
+        <div class="changelog-list">
+          <div class="changelog-item">
+            <span class="changelog-version">1.0</span>
+            <span class="changelog-date">Dec 2024</span>
+            <span class="changelog-title">Initial release with memory profiling, FPS tracking, and shake gesture support</span>
+          </div>
+          <div class="changelog-item">
+            <span class="changelog-version">0.9</span>
+            <span class="changelog-date">Nov 2024</span>
+            <span class="changelog-title">Beta release with custom channels and event markers</span>
+          </div>
+          <div class="changelog-item">
+            <span class="changelog-version">0.8</span>
+            <span class="changelog-date">Oct 2024</span>
+            <span class="changelog-title">Alpha release with core session capture functionality</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-inner">
+          <h2 class="heading-lg cta-title">Try Maude now.</h2>
+          <p class="text-lg cta-subtitle">One line of code. Instant runtime intelligence.</p>
+          <div class="cta-actions">
+            <a href="https://www.nuget.org/packages/Maude" class="btn btn-primary btn-lg">Get Started</a>
+            <a href="https://github.com/matthewrdev/maude" class="btn btn-secondary btn-lg">View on GitHub</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <div class="footer-brand">
+            <div class="nav-logo">M</div>
+            <span>Maude</span>
+          </div>
+          <p class="footer-tagline">AI-powered runtime debugging for .NET MAUI and beyond.</p>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Product</h4>
+          <div class="footer-links">
+            <a href="#features" class="footer-link">Features</a>
+            <a href="#how-it-works" class="footer-link">How It Works</a>
+            <a href="https://www.nuget.org/packages/Maude" class="footer-link">Download</a>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Resources</h4>
+          <div class="footer-links">
+            <a href="https://github.com/matthewrdev/maude" class="footer-link">Documentation</a>
+            <a href="https://github.com/matthewrdev/maude/releases" class="footer-link">Changelog</a>
+            <a href="https://github.com/matthewrdev/maude/issues" class="footer-link">Support</a>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Company</h4>
+          <div class="footer-links">
+            <a href="#" class="footer-link">About</a>
+            <a href="#" class="footer-link">Blog</a>
+            <a href="#" class="footer-link">Careers</a>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Connect</h4>
+          <div class="footer-links">
+            <a href="https://github.com/matthewrdev/maude" class="footer-link">GitHub</a>
+            <a href="https://twitter.com/maboroshi_maui" class="footer-link">Twitter</a>
+            <a href="#" class="footer-link">Discord</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <span>© 2024 Maude. All rights reserved.</span>
+        <div class="footer-bottom-right">
+          <div class="theme-switcher">
+            <button class="theme-btn" data-theme="system" title="System">
+              <i class="ph-light ph-monitor"></i>
+            </button>
+            <button class="theme-btn" data-theme="light" title="Light">
+              <i class="ph-light ph-sun"></i>
+            </button>
+            <button class="theme-btn" data-theme="dark" title="Dark">
+              <i class="ph-light ph-moon"></i>
+            </button>
+          </div>
+          <div class="footer-legal-links">
+            <a href="#" class="footer-link">Privacy</a>
+            <a href="#" class="footer-link">Terms</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
