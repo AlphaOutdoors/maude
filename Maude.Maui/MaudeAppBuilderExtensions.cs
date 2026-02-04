@@ -1,3 +1,6 @@
+using System;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Maui.Hosting;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace Maude;
@@ -8,12 +11,29 @@ namespace Maude;
 public static class MaudeAppBuilderExtensions
 {
     /// <summary>
-    /// Set's up the <see cref="MauiAppBuilder"/> to initialise the <see cref="MaudeRuntime"/> and registers required fonts and dependencies. 
-    /// <para/>
+    /// Set's up the <see cref="MauiAppBuilder"/> to initialise the <see cref="MaudeRuntime"/> and registers required fonts and dependencies.
     /// Does not activate the memory tracking, please use <see cref="MaudeRuntime.Activate"/> to start tracking memory usage.
     /// </summary>
     public static MauiAppBuilder UseMaude(this MauiAppBuilder builder, MaudeOptions? maudeOptions = null)
     {
+        var maudeOptionsBuilder = maudeOptions == null
+            ? MaudeOptions.CreateBuilder()
+            : MaudeOptions.CreateBuilder(maudeOptions);
+
+        if (maudeOptions?.PresentationWindowProvider == null)
+        {
+            maudeOptionsBuilder.WithMauiWindowProvider();
+        }
+
+        maudeOptions = maudeOptionsBuilder.Build();
+
+#if ANDROID
+        if (maudeOptions.PresentationWindowProvider == null)
+        {
+            throw new InvalidOperationException("MaudeOptions.PresentationWindowProvider is required on Android. Call WithMauiWindowProvider or WithPresentationWindowProvider.");
+        }
+#endif
+
         if (!MaudeRuntime.IsInitialized)
         {
             MaudeRuntime.Initialize(maudeOptions);
@@ -24,9 +44,9 @@ public static class MaudeAppBuilderExtensions
         
         return builder.UseSkiaSharp();
     }
+
     /// <summary>
     /// Set's up the <see cref="MauiAppBuilder"/> to initialise the <see cref="MaudeRuntime"/> and registers required fonts and dependencies.
-    /// <para/>
     /// Immediately activates Maudes memory tracking.
     /// </summary>
     public static MauiAppBuilder UseMaudeAndActivate(this MauiAppBuilder builder, MaudeOptions? maudeOptions = null)

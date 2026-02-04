@@ -47,9 +47,11 @@ public static class MaudeRuntime
     
     
     private static void Initialize_Internal(bool activateImmediately, 
-                                            MaudeOptions? options)
+                                            MaudeOptions? options,
+                                            IMaudePresentationService? presentationService)
     {
         MaudeLogger.Info($"Initialising MaudeRuntime (activateImmediately: {activateImmediately}).");
+        
         lock (runtimeLock)
         {
             if (runtime != null)
@@ -58,14 +60,15 @@ public static class MaudeRuntime
             }
 
             options = options ?? MaudeOptions.Default;
+            PlatformBootstrapper.EnsureConfigured(options);
             MaudeLogger.Info($"Using options: sample frequency {options.SampleFrequencyMilliseconds}ms, retention {options.RetentionPeriodSeconds}s, additional channels {options.AdditionalChannels?.Count ?? 0}.");
             
             if (options.AdditionalLogger != null)
             {
                 MaudeLogger.RegisterCallback(options.AdditionalLogger);
             }
-            
-            runtime = new MaudeRuntimeImpl(options);
+
+            runtime = new MaudeRuntimeImpl(options, presentationService);
             MaudeLogger.Info($"MaudeRuntime initialisation complete.");
         }
 
@@ -79,9 +82,9 @@ public static class MaudeRuntime
     /// <summary>
     /// Initialises the <see cref="IMaudeRuntime"/> using the provided <paramref name="options"/> and immediately begins monitoring memory usage.
     /// </summary>
-    public static void InitializeAndActivate(MaudeOptions? options = null)
+    public static void InitializeAndActivate(MaudeOptions? options = null, IMaudePresentationService? presentationService = null)
     {
-        Initialize_Internal(activateImmediately: true, options);
+        Initialize_Internal(activateImmediately: true, options, presentationService);
     }
 
     /// <summary>
@@ -89,9 +92,9 @@ public static class MaudeRuntime
     /// <para/>
     /// Does not start the memory tracker, use <see cref="Activate"/> to start tracking.
     /// </summary>
-    public static void Initialize(MaudeOptions? options = null)
+    public static void Initialize(MaudeOptions? options = null, IMaudePresentationService? presentationService = null)
     {   
-        Initialize_Internal(activateImmediately: false, options);
+        Initialize_Internal(activateImmediately: false, options, presentationService);
     }
     
     /// <summary>
@@ -221,6 +224,31 @@ public static class MaudeRuntime
             }
 
             Instance.EventRenderingBehaviour = value;
+        }
+    }
+
+    /// <summary>
+    /// Gets or sets the chart theme applied during rendering.
+    /// </summary>
+    public static MaudeChartTheme ChartTheme
+    {
+        get
+        {
+            if (!IsInitialized)
+            {
+                return MaudeChartTheme.Dark;
+            }
+
+            return Instance.ChartTheme;
+        }
+        set
+        {
+            if (!IsInitialized)
+            {
+                return;
+            }
+
+            Instance.ChartTheme = value;
         }
     }
 
